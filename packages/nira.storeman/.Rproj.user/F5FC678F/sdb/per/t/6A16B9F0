@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' nira.storeman: This wonderul package is an ideal tool-box for working with stores.\n#'\n#' @section Class VIRTUAL.STORE:\n#' This R reference class contains multiple fields and methods that help to:\n#' 1 - simulate inventory given actual demand and orders\n#' 2 - Forecast the demand according to the history data considering trands and seasonalities\n#' 3 - Manage and control inventory balance and base stock level\n#' 4 - Optimize orders to minimize the overall holding and order cost\n#'\n#' @section Class STORE.GROUP:\n#' This R reference class contains multiple fields and methods for managing a group of virtual stores\n#'\n#' @docType package\n#' @name nira.storeman\n#'\n#' @import timeDate\n#' @import niragen\n#' @import nira.timser\n#' @importClassesFrom nira.timser TSP.MODEL TIME.SERIES\n\n#' @include inv.tools.R\n#' @include virtual.store.R\n#' @include opt.rost.plan.R\n#' @include store.group.R\n\n# Start Date:     22 December 2015\n# Last Revision:  14 September 2016\n# Version:        4.4.2\n\n# Version History:\n\n# Version   Date              Action\n# ----------------------------------\n# 4.3.2     29 July 2016      store.group.R changed to ver 2.1.1\n# 4.3.3     02 August 2016    store.group.R changed to ver 2.1.1\n# 4.4.0     29 July 2016      virtual.store.R changed to ver 4.4.19\n# 4.4.1     02 September 2016 virtusl.store.R changed to ver 4.6.0\n# 4.4.2     14 September 2016 store.group.R changed to ver 2.2.2\n\n\n\nNULL\n#> NULL\n",
+    "created" : 1475009709883.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4012436602",
+    "id" : "6A16B9F0",
+    "lastKnownWriteTime" : 1475010042,
+    "last_content_update" : 1475010042824,
+    "path" : "C:/Users/nimasoft/Dropbox/software/R/packages/nira.storeman/R/nira.storeman.R",
+    "project_path" : "R/nira.storeman.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: nira.storeman\nType: Package\nTitle: A package for inventory(store) management\nImport: timeDate, niragen, nira.timser\nVersion: 4.4.2\nDate: 2016-09-14\nAuthor: Nima Ramezani\nMaintainer: Nima Ramezani <nima.ramezani@cba.com.au>\nDescription: Managing a store and timely ordering of required goods is a challenge for many businesses. This package contains methods for simulation and order optimization of a general store. It provides objects containing all required information of the store including history usage and orders. The object enables you to walk in the timeline, and see various metrics such as current balance, order, demand, holding and order costs. The object has methods to simulate and run the model by moving through the time and see changes. It also provides an active run method that automatically sets the orders whenever the balance is deminished. It respects lead time and can follow a defined fortnightly roster for replenishment of goods. It also can design an optimal roster plan for the replenishment of a group of stores.\nLicense: MIT\nRoxygenNote: 5.0.1\nCollate:\n    'inv.tools.R'\n    'store.group.R'\n    'opt.rost.plan.R'\n    'virtual.store.R'\n    'nira.storeman.R'\n",
+    "created" : 1475009976398.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "103571350",
+    "id" : "75F9A936",
+    "lastKnownWriteTime" : 1475009997,
+    "last_content_update" : 1475009997164,
+    "path" : "C:/Users/nimasoft/Dropbox/software/R/packages/nira.storeman/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}

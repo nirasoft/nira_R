@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\n  # Header\n  # Filename:      opt.rost.plan.R\n  # Description:   This module contains tools to plan an optimal seasonal roster for store replenishments\n  #                according to the given seasonal usage\n  # Author:        Nima Ramezani Taghiabadi\n  # Email :        N.RamezaniTaghiabadi@uws.edu.au\n  # Start Date:    17 January 2016\n  # Last Revision: 19 February 2016\n  # Version:       1.2.0\n\n# Version History:\n\n# Version   Date                Action\n# -------------------------------------\n# 1.2.0     19 February 2016    function roster.cost() changed. Roster cost is now computed in a different way\n\nopt.bin.split = function(v, free = rep(1, length(v))){\n  N = length(v)\n  r.min = 1\n  for (i in 2:N){\n    nom = sum(v[i:N])\n    den = sum(v[1:(i-1)])\n    permit = (den > 0) & free[i]\n    if (permit){\n      r = abs(nom/den - 1)\n      if (r < r.min) {\n        r.min = r\n        i.min = i\n      }\n    }\n  }\n  return(i.min)\n}\n\n#  r: vector of length 14: given roster\n# fr: vector of length 14: Any feasible fortnightly roster\nis.feasible = function(r, fr){\n  sum(r[is.na(fr)], na.rm = T) == 0\n}\n\n# fr : 1  1  NA  NA  1  0  NA\n# a  : 1  0  0   1   1  0  1\n# out: 1  0  NA  NA  0  1  NA\nint.to.roster = function(x, fr){\n  a = as.integer(intToBits(x))\n  y = fr\n  y[!is.na(fr)] = a[sequence(length(y[!is.na(fr)]))]\n  return(y)\n}\n\n# roster.to.int\n\nroster.cost = function(r, q = NA, demands = rep(1.0, 14)){\n  r = as.logical(r)\n  s = numeric()\n  j = 1\n  for (i in 1:14){\n    if (!is.na(r[i])){\n      if (r[i]) {j = j + 1}\n    }\n\n    s[j] = add(s[j], demands[i])\n  }\n\n  s[1] = add(s[1], s[j])\n  s    = s[-j]\n  # if (is.na(q)){return(sd(s))} else {return(sum((s - q) > 0)*1000000 + mean((q - s)^2))}\n\n  if (is.na(q)){return(sd(s))} else {\n    cost = mean((q - s)^2) + roster.cost.sim(r, q, demands = demands)\n    return(cost)\n  }\n}\n\n\n# r: fortnight roster\n# p: pernalty\n# q: order(replenishment) amount\nroster.cost.sim = function(r, q, p = 1000*q, oc = 133, hcr = 0.0225/365, demands = rep(1.0, 14)){\n  r[is.na(r)] <- 0\n  assert(sum(r) > 0, \"Given roster adds up to zero\")\n  r     = as.logical(r)\n  st    = which(r)[1]\n  b     = numeric()\n\n  b[st] = q - demands[st]\n  if (st < 14){for (i in (st + 1):14){b[i] = ifelse(r[i], q, b[i - 1]) - demands[i]}}\n  if (st > 1) {b[1] = ifelse(r[1],q, b[14]) - demands[1]}\n  if (st > 2) {for (i in 2:(st - 1)) {b[i] = ifelse(r[i], q, b[i - 1]) - demands[i]}}\n  b[b < 0] = p\n  cost     = sum(b*hcr) + sum(r*oc)\n  return(cost)\n}\n\nopt.roster = function(demands, freq = 2, q = NA, fr = c(1,1,1,1,1,NA,NA,1,1,1,1,1,NA,NA)){\n  N   = 2^length(fr[!is.na(fr)]) - 1\n  cst = numeric()\n  RST = numeric()\n  for (i in sequence(N)){\n    rst    = int.to.roster(i, fr)\n    if (is.na(freq)){\n      cst = c(cst, roster.cost(rst, q = q, demands = demands))\n      RST = rbind(RST, rst)\n    } else {\n      if (sum(rst, na.rm = T) == freq){\n        cst = c(cst, roster.cost(rst, q = q, demands = demands))\n        RST = rbind(RST, rst)\n      }\n    }\n  }\n  if (length(cst) < 1){return(rep(NA, 14))} else {\n    min.i = order(cst)[1]\n    return(RST[min.i,])\n  }\n}\n\n",
+    "created" : 1475010091296.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3794319772",
+    "id" : "191C1E3",
+    "lastKnownWriteTime" : 1475010121,
+    "last_content_update" : 1475010121548,
+    "path" : "C:/Users/nimasoft/Dropbox/software/R/packages/nira.storeman/R/opt.rost.plan.R",
+    "project_path" : "R/opt.rost.plan.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
